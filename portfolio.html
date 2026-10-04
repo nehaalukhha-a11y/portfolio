@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neha Lukhha | Aspiring Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Neha Lukhha, BCA student and aspiring full stack developer skilled in HTML, CSS, JavaScript, Python and Java.">
+
+  <!-- Fonts (optional): if offline, the fallback fonts are used -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Young+Serif&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ---------- 1. COLORS & FONTS (change here, updates everywhere) ---------- */
+    :root {
+      --beige: #f6f0e4;
+      --beige-deep: #ebe0cb;
+      --sand: #d8c7a8;
+      --caramel: #a9744f;
+      --brown: #6b4a3a;
+      --brown-dark: #3f2b21;
+      --brown-soft: #7a6354;
+
+      --font-heading: "Young Serif", Georgia, serif;
+      --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      --font-code: "JetBrains Mono", Consolas, monospace;
+    }
+
+    /* ---------- 2. BASICS ---------- */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body { background: var(--beige); color: var(--brown-dark); font-family: var(--font-body); line-height: 1.7; font-size: 1.05rem; }
+    a { color: inherit; }
+    h1, h2, h3 { font-family: var(--font-heading); font-weight: 400; line-height: 1.15; color: var(--brown); }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--caramel); outline-offset: 3px; }
+    .container { width: min(100% - 2.5rem, 1040px); margin-inline: auto; }
+
+    /* ---------- 3. NAVIGATION (stays at top while scrolling) ---------- */
+    header { position: sticky; top: 0; z-index: 10; background: rgba(246, 240, 228, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--sand); }
+    .nav { display: flex; justify-content: space-between; align-items: center; padding: 0.9rem 0; gap: 1rem; flex-wrap: wrap; }
+    .logo { font-family: var(--font-heading); font-size: 1.25rem; color: var(--brown); text-decoration: none; }
+    .nav ul { list-style: none; display: flex; gap: 1.3rem; align-items: center; flex-wrap: wrap; }
+    .nav a { text-decoration: none; color: var(--brown-soft); font-size: 0.97rem; }
+    .nav a:hover { color: var(--brown); }
+    .nav .nav-cta { background: var(--brown); color: var(--beige); padding: 0.4rem 1.1rem; border-radius: 999px; font-weight: 600; }
+    .nav .nav-cta:hover { background: var(--brown-dark); color: var(--beige); }
+
+    /* ---------- 4. BUTTONS ---------- */
+    .buttons { display: flex; gap: 0.9rem; margin-top: 2rem; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 0.8rem 1.6rem; border-radius: 999px; border: 2px solid var(--brown); text-decoration: none; font-weight: 700; transition: background 0.2s, color 0.2s; }
+    .btn-fill { background: var(--brown); color: var(--beige); }
+    .btn-fill:hover { background: var(--brown-dark); border-color: var(--brown-dark); }
+    .btn-line { color: var(--brown); }
+    .btn-line:hover { background: var(--beige-deep); }
+
+    /* ---------- 5. HERO ---------- */
+    .hero { padding: 5rem 0 4.5rem; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: center; }
+    .badge { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--beige-deep); border: 1px solid var(--sand); border-radius: 999px; padding: 0.3rem 0.9rem; font-size: 0.92rem; color: var(--brown); margin-bottom: 1.4rem; }
+    .badge::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: #6f8f4e; }
+    .hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); margin-bottom: 0.4rem; }
+    .hero .role { font-family: var(--font-heading); color: var(--caramel); font-size: clamp(1.3rem, 3vw, 1.8rem); margin-bottom: 1.2rem; }
+    .hero p.lead { max-width: 33rem; color: var(--brown-soft); font-size: 1.15rem; }
+
+    /* The dark "code card" is the one bold element on the page */
+    .code-card { background: var(--brown-dark); color: #efe4d0; border-radius: 16px; padding: 1.4rem 1.5rem 1.6rem; font-family: var(--font-code); font-size: 0.9rem; line-height: 1.8; box-shadow: 0 18px 40px rgba(63, 43, 33, 0.22); overflow-x: auto; }
+    .code-card .dots { display: flex; gap: 0.4rem; margin-bottom: 1rem; }
+    .code-card .dots span { width: 0.7rem; height: 0.7rem; border-radius: 50%; background: #8a6b58; }
+    .code-card .k { color: #d9a77c; }   /* keywords */
+    .code-card .s { color: #b8cf9a; }   /* strings */
+    .code-card .c { color: #a8927f; }   /* comments */
+    .code-card pre { font: inherit; white-space: pre; }
+
+    /* ---------- 6. SECTIONS ---------- */
+    section { padding: 4.5rem 0; }
+    section.alt { background: var(--beige-deep); }
+    .section-head { margin-bottom: 2.2rem; }
+    .section-head h2 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
+    .section-head p { color: var(--brown-soft); margin-top: 0.5rem; max-width: 38rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.4rem; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 3rem; align-items: start; }
+    .about-text p + p { margin-top: 1rem; }
+    .facts { display: grid; gap: 1rem; }
+    .fact { background: var(--beige); border: 1px solid var(--sand); border-radius: 12px; padding: 1rem 1.2rem; }
+    .fact b { display: block; color: var(--brown); font-size: 0.95rem; }
+    .fact span { color: var(--brown-soft); font-size: 0.98rem; }
+
+    /* Cards */
+    .card { background: var(--beige); border: 1px solid var(--sand); border-radius: 14px; padding: 1.6rem; display: flex; flex-direction: column; }
+    .card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .card p { color: var(--brown-soft); font-size: 1rem; }
+    .card ul.points { margin: 0.8rem 0 0 1.1rem; color: var(--brown-soft); font-size: 0.98rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; list-style: none; }
+    .tags li { background: var(--beige-deep); border: 1px solid var(--sand); border-radius: 999px; padding: 0.1rem 0.8rem; font-size: 0.88rem; color: var(--brown); }
+    .card-links { display: flex; gap: 1.2rem; margin-top: auto; padding-top: 1.2rem; }
+    .card-links a { color: var(--brown); font-weight: 700; text-underline-offset: 4px; }
+    .card.soon { border-style: dashed; background: transparent; }
+
+    /* Skills */
+    .skill-group { background: var(--beige); border: 1px solid var(--sand); border-radius: 14px; padding: 1.5rem; }
+    .skill-group h3 { font-size: 1.1rem; margin-bottom: 0.2rem; }
+    .skill-group .tags { margin-top: 0.8rem; }
+
+    /* Experience / education */
+    .timeline { display: grid; gap: 1.6rem; border-left: 2px solid var(--sand); padding-left: 1.6rem; max-width: 46rem; }
+    .entry h3 { font-size: 1.2rem; }
+    .entry .meta { color: var(--caramel); font-weight: 700; font-size: 0.95rem; margin: 0.15rem 0 0.5rem; }
+    .entry ul { margin-left: 1.1rem; color: var(--brown-soft); }
+
+    /* Contact */
+    .contact-box { background: var(--brown-dark); color: #efe4d0; border-radius: 20px; padding: clamp(2rem, 6vw, 3.5rem); }
+    .contact-box h2 { color: #f6f0e4; font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 0.8rem; }
+    .contact-box p { max-width: 36rem; color: #d8c9b3; }
+    .contact-box .btn-fill { background: var(--beige); color: var(--brown-dark); border-color: var(--beige); }
+    .contact-box .btn-fill:hover { background: var(--beige-deep); }
+    .contact-box .btn-line { color: var(--beige); border-color: var(--beige); }
+    .contact-box .btn-line:hover { background: rgba(246, 240, 228, 0.12); }
+
+    footer { padding: 1.8rem 0; color: var(--brown-soft); font-size: 0.95rem; }
+
+    /* ---------- 7. SMALL SCREENS ---------- */
+    @media (max-width: 800px) {
+      .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .hero { padding: 3.5rem 0 3rem; }
+      section { padding: 3.2rem 0; }
+      header { position: static; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header>
+    <div class="container nav">
+      <a class="logo" href="#top">Neha Lukhha</a>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a class="nav-cta" href="#contact">Hire me</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="badge">Open to internships and full-time roles</span>
+          <h1>Neha Lukha</h1>
+          <p class="role">Aspiring Full Stack Developer</p>
+          <p class="lead">I build clean, responsive websites with HTML, CSS, and JavaScript, and I'm growing into back-end development with Python and Java.</p>
+          <div class="buttons">
+            <a class="btn btn-fill" href="#projects">View my work</a>
+            <!-- Put your resume PDF in the same folder as this file and name it exactly: Neha-Lukhha-Resume.pdf -->
+            <a class="btn btn-line" href="Neha-Lukhha-Resume.pdf" download>Download resume</a>
+          </div>
+        </div>
+
+        <!-- Code card: edit the text inside to change what it shows -->
+        <div class="code-card" aria-hidden="true">
+          <div class="dots"><span></span><span></span><span></span></div>
+<pre><span class="k">const</span> neha = {
+  role: <span class="s">"Full Stack Developer"</span>,
+  studying: <span class="s">"BCA, 3rd year"</span>,
+  frontEnd: [<span class="s">"HTML"</span>, <span class="s">"CSS"</span>, <span class="s">"JavaScript"</span>],
+  languages: [<span class="s">"Python"</span>, <span class="s">"Java"</span>, <span class="s">"C++"</span>],
+  openTo: <span class="s">"Internships &amp; jobs"</span>
+};</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="alt">
+      <div class="container about-grid">
+        <div class="about-text">
+          <div class="section-head"><h2>About me</h2></div>
+          <p>I'm a third-year BCA student at Chaudhary Devi Lal University, Sirsa, with a strong interest in building for the web. Alongside my degree, I'm studying full stack web development to learn how front-end and back-end work together.</p>
+          <p>My web development internship at AFCA, Hisar gave me hands-on practice with responsive design and clean page structure. I learn best by building, so I keep creating projects and improving them.</p>
+          <p>I'm looking for an internship or entry-level developer role where I can contribute, learn from experienced teammates, and grow quickly.</p>
+        </div>
+        <div class="facts">
+          <div class="fact"><b>Education</b><span>BCA, 3rd year &middot; GPA 8.0</span></div>
+          <div class="fact"><b>Focus</b><span>Full stack web development</span></div>
+          <div class="fact"><b>Location</b><span>Haryana, India</span></div>
+          <div class="fact"><b>Looking for</b><span>Internships and junior developer roles</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-head"><h2>Skills</h2></div>
+        <div class="grid">
+          <div class="skill-group">
+            <h3>Front-end</h3>
+            <ul class="tags"><li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Responsive design</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Programming</h3>
+            <ul class="tags"><li>Python</li><li>Java</li><li>C</li><li>C++</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Computer science</h3>
+            <ul class="tags"><li>Data Structures and Algorithms</li><li>Object-Oriented Programming</li></ul>
+          </div>
+          <div class="skill-group">
+            <h3>Tools</h3>
+            <ul class="tags"><li>VS Code</li><li>Git and GitHub</li><li>Canva</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS =====
+         HOW TO ADD YOUR LINKS (see the comment above each link):
+         - "Code" link: your GitHub repository URL
+         - "Live demo" link: the URL where the project is hosted (GitHub Pages or Netlify)
+         If you leave href="#", that link hides itself automatically, so nothing looks broken. -->
+    <section id="projects" class="alt">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p>Hands-on projects where I practice HTML, CSS, and JavaScript. More are coming as I move through my full stack course.</p>
+        </div>
+        <div class="grid">
+
+          <article class="card">
+            <h3>To-Do List Website</h3>
+            <p>A responsive task manager for planning your day.</p>
+            <ul class="points">
+              <li>Add and delete tasks</li>
+              <li>Mark tasks as complete</li>
+              <li>Works on phone and desktop</li>
+            </ul>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <div class="card-links">
+              <a href="#" target="_blank" rel="noopener">Code</a>       <!-- paste GitHub link here -->
+              <a href="#" target="_blank" rel="noopener">Live demo</a>  <!-- paste live link here -->
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Mobile Calculator</h3>
+            <p>A calculator built for phone screens.</p>
+            <ul class="points">
+              <li>Touch-friendly buttons</li>
+              <li>Calculation logic in JavaScript</li>
+            </ul>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <div class="card-links">
+              <a href="#" target="_blank" rel="noopener">Code</a>
+              <a href="#" target="_blank" rel="noopener">Live demo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Digital Clock</h3>
+            <p>A live clock that shows the current time and updates every second.</p>
+            <ul class="points">
+              <li>Real-time updates with JavaScript</li>
+              <li>Clean, readable layout</li>
+            </ul>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+            <div class="card-links">
+              <a href="#" target="_blank" rel="noopener">Code</a>
+              <a href="#" target="_blank" rel="noopener">Live demo</a>
+            </div>
+          </article>
+
+          <article class="card soon">
+            <h3>Next up</h3>
+            <p>Bigger full stack projects with a back end and a database are in the works.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE & EDUCATION ===== -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-head"><h2>Experience and education</h2></div>
+        <div class="timeline">
+          <div class="entry">
+            <h3>Web Development Intern</h3>
+            <p class="meta">AFCA, Hisar</p>
+            <ul>
+              <li>Learned web development fundamentals and responsive design techniques.</li>
+              <li>Built front-end components with HTML and CSS to structure and style pages.</li>
+              <li>Learned website architecture and user interface best practices.</li>
+            </ul>
+          </div>
+          <div class="entry">
+            <h3>Bachelor of Computer Applications (BCA)</h3>
+            <p class="meta">Chaudhary Devi Lal University, Sirsa &middot; GPA 8.0</p>
+            <ul>
+              <li>Currently in the 3rd year, studying full stack web development alongside the degree.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CERTIFICATIONS ===== -->
+    <section class="alt">
+      <div class="container">
+        <div class="section-head"><h2>Certifications and learning</h2></div>
+        <div class="grid">
+          <article class="card"><h3>BE10x Workshop</h3></article>
+          <article class="card"><h3>Claude Workshop</h3></article>
+          <article class="card"><h3>Full Stack Web Development</h3></article>
+          <article class="card"><h3>Python Programming Basics</h3></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <h2>Let's work together</h2>
+          <p>I'm open to internships and entry-level developer roles. Send me a message and I'll reply soon.</p>
+          <div class="buttons">
+            <a class="btn btn-fill" href="mailto:nehaalukhha@gmail.com">Email me</a>
+            <!-- Replace "your-username" with your GitHub username -->
+            <a class="btn btn-line" href="https://github.com/your-username" target="_blank" rel="noopener">GitHub</a>
+            <!-- Optional: remove the comment marks and add your LinkedIn link
+            <a class="btn btn-line" href="https://www.linkedin.com/in/your-name" target="_blank" rel="noopener">LinkedIn</a>
+            -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">&copy; <span id="year"></span> Neha Lukhha</div>
+  </footer>
+
+  <script>
+    // 1. Puts the current year in the footer automatically
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // 2. Hides any link that still has href="#", so unfinished links never show
+    document.querySelectorAll('.card-links a[href="#"]').forEach(function (link) {
+      link.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
